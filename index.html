@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day 💗</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        overflow: hidden;
+
+        /* FIRST BACKGROUND IMAGE */
+        background:
+            linear-gradient(
+                rgba(255, 227, 230, 0.65),
+                rgba(255, 227, 230, 0.65)
+            ),
+            url("image.jpg");
+
+        background-size: 30% auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        transition: background 1s ease-in-out;
+    }
+
+    h1 {
+        color: #d6336c;
+        font-size: 30px;
+        margin-bottom: 15px;
+        z-index: 2;
+    }
+
+    h2 {
+        color: black;
+        font-size: 40px;
+        z-index: 2;
+    }
+
+    p {
+        font-size: 22px;
+        color: #000;
+        z-index: 2;
+    }
+
+    #buttons {
+        margin-top: 40px;
+        z-index: 2;
+    }
+
+    button {
+        padding: 15px 35px;
+        font-size: 20px;
+        margin: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    #yesBtn {
+        background: #ff6f91;
+        color: white;
+    }
+
+    #noBtn {
+        background: #f7b6c2;
+        color: white;
+        position: relative;
+    }
+
+    /* ❤️ HEART RAIN */
+    .heart {
+        position: fixed;
+        top: -10px;
+        font-size: 20px;
+        color: #ff4d6d;
+        animation: fall linear forwards;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine? 💖</h1>
+
+<div id="buttons">
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+</div>
+
+<script>
+    /* ❤️ HEART RAIN GENERATOR */
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        heart.style.fontSize = (14 + Math.random() * 20) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    setInterval(createHeart, 200);
+
+    // YES button action
+    document.getElementById("yesBtn").onclick = function () {
+
+        document.body.style.background = `
+            linear-gradient(
+                rgba(255, 227, 230, 0),
+                rgba(255, 227, 230, 0)
+            ),
+            url("image2.jpg")
+        `;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundRepeat = "no-repeat";
+
+        document.body.innerHTML = `
+            <h2>I knew you’d say YES 💕</h2>
+            <p>LOVE YOU MY BROWNIE 💙</p>
+        `;
+    };
+
+    // NO button moves away
+    let noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", function () {
+        let x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+        let y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+</script>
+
+</body>
+</html>
